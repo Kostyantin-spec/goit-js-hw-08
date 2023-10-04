@@ -13,6 +13,19 @@ throttle(function({seconds}) {
     console.log(localStorage);
 }, 1000));
 
+const currentTimeFromStorage = localStorage.getItem("videoplayer-current-time");
+
+if (currentTimeFromStorage !== null) {
+    const currentTimeInSeconds = parseFloat(currentTimeFromStorage);
+
+player.setCurrentTime(currentTimeInSeconds).then(function(seconds) {
+    player.play().then(function() {
+        console.log('the video was played');
+    }).catch(function(error) {
+        console.log(error);
+    });;
+})
+}
 // player.setCurrentTime(30.456).then(function(seconds) {
 //     seconds = the actual time that the player seeked to
 // }).catch(function(error) {
