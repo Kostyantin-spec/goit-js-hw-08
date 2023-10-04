@@ -1,17 +1,12 @@
 import throttle from 'lodash.throttle';
 
-//jQuery(window).on('scroll', _.throttle(updatePosition, 100));
 
-//var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
-//jQuery(element).on('click', throttled);
+const formEl = document.querySelector('.feedback-form');
+const emailInp = document.querySelector('input[name="email"]');
+const passInp = document.querySelector('textarea[name="message"]');
+const submitBtn = document.querySelector('button[type="submit"]');
 
-//jQuery(window).on('popstate', throttled.cancel);
-//const formEl = document.querySelector('.login-form');
-//const emailInp = document.querySelector('input[name="email"]');
-//const passInp = document.querySelector('input[name="password"]');
-//const submitBtn = document.querySelector('button[type="submit"]');
-
-//submitBtn.classList.add('submit');
+submitBtn.classList.add('submit');
 
 formEl.addEventListener('submit', formSubmitHadler)
 
@@ -20,13 +15,13 @@ function formSubmitHadler(event) {
 
     const form = event.currentTarget.elements;
     const email = form.email.value;
-    const password = form.password.value;
+    const message = form.message.value;
     
-    if (!password || !email) return alert('All the fields should be filled!')
+    if (!message || !email) return alert('All the fields should be filled!')
 
     const formDataObj = {
         email,
-        password,
+        message,
     }
    const formData = new FormData(event.currentTarget);
 
@@ -34,13 +29,12 @@ function formSubmitHadler(event) {
         const formDataCheck = {};
 
         formDataCheck[name] = value;
-        //console.log('Data inside FORM DATA CLASS', formDataCheck);
+        
     })
      console.log('Object form data', formDataObj);
-    // console.log('Class Form Data', formData);
+    
 
     formEl.reset();
 }
-
 
 
