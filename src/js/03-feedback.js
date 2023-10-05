@@ -9,18 +9,19 @@ const formData = {};
 
 const refs = {
     form: document.querySelector('.feedback-form'),
-    textarea: document.querySelector('.feedback-form textarea'),
+   //textarea: document.querySelector('.feedback-form textarea'),
+    email: document.querySelector('input[name="email"]'),
 };
 
-refs.form.addEventListener('email', throttle(onFormSubmit, 500));
-refs.textarea.addEventListener('message', throttle(onTextareaInput, 500));
+//refs.form.addEventListener('email', throttle(onFormSubmit, 500));
+//refs.textarea.addEventListener('message', throttle(onTextareaInput, 500));
 
 refs.form.addEventListener('input',e => {
     //consolr.log(e.target.name);
     //console.log(e.target.value);
 
     formData[e.target.name] = e.target.value;
-
+    localStorage.setItem(STORAGE_KEY, formData);
     console.log(formData);
 });
 
@@ -37,7 +38,8 @@ function onFormSubmit(evt) {
     evt.preventDefault();
 
     console.log('Отправляем форму');
-
+    refs.texarea.value = "";
+    refs.email.value = "";
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
 }
@@ -45,21 +47,22 @@ function onFormSubmit(evt) {
 //Получить значение поля
 //Сохранить его в хранилище
 
-function onTextareaInput(evt) {
-    const message = evt.target.value;
+// function onTextareaInput(evt) {
+//     const message = evt.target.value;
 
-    localStorage.setItem(STORAGE_KEY, message);
-}
+//     localStorage.setItem(STORAGE_KEY, message);
+// }
 
 //Получаем значение из хранилеща
 //Если там чтото біло, обновляем DOM
 
 function populateTextarea() {
-    const savedMessage = localStorage.getItem(STORAGE_KEY);
+    const savedData = localStorage.getItem(STORAGE_KEY);
 
-    if (savedMessage) {   
-    console.log(savedMessage);
-    refs.textarea.value = savedMessage;
+    if (savedData !== null) {   
+    console.log(savedData);
+    refs.textarea.value = savedData;
+    refs.email.value = savedData.email;
     }
 }
 
