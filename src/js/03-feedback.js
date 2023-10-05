@@ -22,7 +22,11 @@ refs.form.addEventListener('input',e => {
     formData[e.target.name] = e.target.value;
 
     console.log(formData);
-})
+});
+
+
+populateTextarea();
+
 
 //Останавливаем поведение по умалчанию
 //Убираем сообщение из хранилища
@@ -50,7 +54,7 @@ function onTextareaInput(evt) {
 //Получаем значение из хранилеща
 //Если там чтото біло, обновляем DOM
 
-function populateMessageOutput() {
+function populateTextarea() {
     const savedMessage = localStorage.getItem(STORAGE_KEY);
 
     if (savedMessage) {   
