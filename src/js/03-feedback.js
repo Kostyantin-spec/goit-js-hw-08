@@ -9,24 +9,26 @@ const formData = {};
 
 const refs = {
     form: document.querySelector('.feedback-form'),
-   //textarea: document.querySelector('.feedback-form textarea'),
+    textarea: document.querySelector('textarea[name="message"'),
     email: document.querySelector('input[name="email"]'),
 };
 
-//refs.form.addEventListener('email', throttle(onFormSubmit, 500));
+refs.form.addEventListener('email', throttle(onFormSubmit, 500));
 //refs.textarea.addEventListener('message', throttle(onTextareaInput, 500));
 
 refs.form.addEventListener('input',e => {
     //consolr.log(e.target.name);
-    //console.log(e.target.value);
+    console.log(e.target.value);
 
     formData[e.target.name] = e.target.value;
-    localStorage.setItem(STORAGE_KEY, formData);
-    console.log(formData);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    
 });
 
 
 populateTextarea();
+
+
 
 
 //Останавливаем поведение по умалчанию
@@ -37,8 +39,7 @@ populateTextarea();
 function onFormSubmit(evt) {
     evt.preventDefault();
 
-    console.log('Отправляем форму');
-    refs.texarea.value = "";
+    refs.textarea.value = "";
     refs.email.value = "";
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
@@ -60,9 +61,15 @@ function populateTextarea() {
     const savedData = localStorage.getItem(STORAGE_KEY);
 
     if (savedData !== null) {   
-    console.log(savedData);
+    //console.log(savedData);
     refs.textarea.value = savedData;
     refs.email.value = savedData.email;
     }
 }
 
+// function initForm() {
+//     if (persistedFilters) {
+//         persistedFilters = JSON.parse(persistedFilters);
+//         console.log(persistedFilters);
+//     }
+// }
