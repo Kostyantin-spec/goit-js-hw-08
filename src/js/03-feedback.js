@@ -25,7 +25,7 @@ refs.form.addEventListener('email', throttle(onFormSubmit, 500));
 refs.form.addEventListener('input', throttle(onFormInput,500));
 function onFormInput(e) {
     formData[e.target.name] = e.target.value;
-    localStorage.setItem(STORAGE_KEY, JSON>stringify(formData));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 
